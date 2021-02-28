@@ -37,36 +37,24 @@ background-color: #fff
     <div class="temp p-3">
     <h1 class="text-2xl font-bold mt-5 mx-56 text-center">Photo Gallery(<span>{{calculated}}</span>)</h1>
 
-    <div class="flex justify-between space-x-2 mt-5">
-      <div v-show="showBar">
-        <input type="text" v-model="inputTask" placeholder="Please enter text for searching photos "
-          class="p-2 bg-white rounded flex-1 w-96" @keyup.enter="searchPicture">
-        <button @click="toggleBar" class="bg-blue-500 text-white  py-2 px-3 rounded ml-2">Cancel</button>
-      </div>
-      <button @click="toggleBar" v-show="showSearch"><span class="material-icons">
-          search
-        </span></button>
-      <span v-show="showCanvas" class="px-8 pb-7 pt-2 bg-pink-100 text-right">
-        <button class="text-white text-2xl" @click="hideCanvas">X</button>
-        <img :src="showItems.image" width="500" height="500">
-      </span>
-
+    <div class="flex flex-col justify-between items-center space-x-2 mt-5">
+      <photo-search @toggle-search="toggleSearch" @search-picture="searchPicture" :showbar="showBar" :showsearch="showSearch" @toggle-bar="toggleBar"></photo-search>
+      <photo-view :showitems="showItems" :showcanvas="showCanvas" @toggle-canvas = 'toggleCanvas' @hide-canvas ='hideCanvas'></photo-view> >
+      <photo-item @clicked-item="clickedItem":gallerys="gallerys" :heart="heart" @toggle-heart="toggleHeart" @toggle-canvas="toggleCanvas"></photo-item>
+      <span class="mt-10 font-bold text-2xl">{{ checkItems }}</span>
     </div>
-    <ul>
-      <li v-for="(gallery,index) in gallerys" class="flex items-center mt-5" v-show="gallery.show">
-        <button v-on:click="toggleHeart(index)">
-          <img :src="gallery.image" width="200" height="200">
-        </button>
-        <span class="ml-4 text-xl font-medium w-80">{{gallery.title}}</span>
-        <span v-show="gallery.done"><img :src="heart"></span>
-      </li>
-      <li class="mt-10 font-bold text-2xl">{{ checkItems }}</li>
 
-    </ul>
   </div>
-  </div>
+
   <!-- my main.js -->
-  <script src="./main.js"></script>
+  <script src="./main.js"></script>  
+  <script src="./components/Photoitem.js"></script>
+  <script src="./components/PhotoSearch.js"></script>
+  <script src="./components/PhotoView.js"></script>
+  
+  <script>
+    const mountedApp = app.mount('#app');
+  </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-const app = {
+const app = Vue.createApp({
     data() {
         return {
             gallerys: [{ image: "./images/1.jpg", title: "Cat , Korat species", done: false, show: true }
@@ -14,12 +14,7 @@ const app = {
         }
     },
     methods: {
-        next(){
-            this.toggleHeart(this.index+1);
-        },
-        previous(){
-            this.toggleHeart(this.index-1);
-        },
+
         toggleHeart(index) {
             if(this.gallerys[index].show == false){}
             else{
@@ -44,18 +39,31 @@ const app = {
             this.toggleHeart(this.index);
         }
         ,
-        toggleCanvas(input) {
-            this.showCanvas = true;
-            this.showBar = false;
-            this.showSearch = false;
-            this.showItems = input;
+        toggleCanvas(index, input) {
+            this.index = index;
+            if (this.gallerys[index].canvas == false) {
+                for (let i = 0; i < this.gallerys.length; i++) {
+                    if (index == i) continue;
+                    this.gallerys[i].canvas = false;
+                }
+                this.gallerys[index].canvas = true;
+                this.showCanvas = true;
+                this.showBar = false;
+                this.showSearch = false;
+                this.showItems = input;
+            }
         },
         toggleBar() {
             this.showBar = !this.showBar;
             this.showSearch = !this.showSearch;
             this.togglePictureShow();
         },
-        searchPicture() {
+        toggleSearch() {
+            this.showBar = !this.showBar;
+            this.showSearch = !this.showSearch;
+        },
+        searchPicture(searching) {
+            this.inputTask=searching;
             if (this.inputTask) {
                 for (let i = 0; i < this.gallerys.length; i++) {
                     if (this.gallerys[i].title.toLowerCase().includes(this.inputTask.toLowerCase())) {
@@ -64,6 +72,7 @@ const app = {
                     else {
                         this.gallerys[i].show = false;
                     }
+                    
                 }
             }
         },
@@ -91,5 +100,4 @@ const app = {
 
     }
 
-}
-Vue.createApp(app).mount('#app')
+})
