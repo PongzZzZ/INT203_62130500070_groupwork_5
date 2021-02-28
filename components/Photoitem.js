@@ -31,7 +31,9 @@ app.component('photo-item', {
       toggleHeart(index) {
         this.$emit('toggle-heart', index);
       },
-
+      toggleCanvas(item){
+        this.$emit('toggle-canvas',item);
+      },
       clickedItem(index,item){
         this.$emit('clicked-item',index,item);
       }

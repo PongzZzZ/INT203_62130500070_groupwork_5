@@ -1,40 +1,31 @@
-  
 app.component('photo-view', {
     props: {
-        showitem: {
+        showItems: {
             type: Object,
             require: true
+        },
+        showCanvas: {
+            Boolean
         }
 
     },
     template:
-        /*html*/
-        `<span v-show="showitem.canvas" class="px-8 pb-7 pt-2 bg-black text-right">
+        
+        `<span v-show="showCanvas" class="px-8 pb-7 pt-2 bg-pink-100 text-right">
         <button class="text-white text-2xl" @click="hideCanvas">X</button>
-        <img :src="showitem.image" width="400" height="400">
-        <div class="flex justify-between">
-          <button class="text-white text-2xl" @click="previous">
-            &lt; </button>
-              <button class="text-white text-2xl" @click="next">&gt;</button>
-        </div>
-      </span>`,
+        <img :src="showItems.image" width="500" height="500">
+        </span>`,
     methods: {
-        hideCanvas() {
-            this.$emit('hide-canvas');
+        toggleCanvas(){
+            this.$emit();
         },
-        previous() {
-            this.$emit('previous');
-        },
-        next() {
-            this.$emit('next');
-        }
-    },
-    data() {
-        return {
+        hideCanvas(){
+            this.$emit();
+        
             
         }
-    }
-    ,computed:{
-        
-    }
+        }
+
+
+
 })

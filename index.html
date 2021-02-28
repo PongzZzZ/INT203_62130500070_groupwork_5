@@ -39,7 +39,10 @@ background-color: #fff
 
     <div class="flex flex-col justify-between items-center space-x-2 mt-5">
       <photo-search @toggle-search="toggleSearch" @search-picture="searchPicture" :showbar="showBar" :showsearch="showSearch" @toggle-bar="toggleBar"></photo-search>
-      <photo-view :showitems="showItems" :showcanvas="showCanvas" @toggle-canvas = 'toggleCanvas' @hide-canvas ='hideCanvas'></photo-view> >
+      <span v-show="showCanvas" class="px-8 pb-7 pt-2 bg-pink-100 text-right">
+        <button class="text-white text-2xl" @click="hideCanvas">X</button>
+        <img :src="showItems.image" width="500" height="500">
+        </span>
       <photo-item @clicked-item="clickedItem":gallerys="gallerys" :heart="heart" @toggle-heart="toggleHeart" @toggle-canvas="toggleCanvas"></photo-item>
       <span class="mt-10 font-bold text-2xl">{{ checkItems }}</span>
     </div>
@@ -50,7 +53,6 @@ background-color: #fff
   <script src="./main.js"></script>  
   <script src="./components/Photoitem.js"></script>
   <script src="./components/PhotoSearch.js"></script>
-  <script src="./components/PhotoView.js"></script>
   
   <script>
     const mountedApp = app.mount('#app');

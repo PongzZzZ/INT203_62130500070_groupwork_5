@@ -39,19 +39,11 @@ const app = Vue.createApp({
             this.toggleHeart(this.index);
         }
         ,
-        toggleCanvas(index, input) {
-            this.index = index;
-            if (this.gallerys[index].canvas == false) {
-                for (let i = 0; i < this.gallerys.length; i++) {
-                    if (index == i) continue;
-                    this.gallerys[i].canvas = false;
-                }
-                this.gallerys[index].canvas = true;
-                this.showCanvas = true;
-                this.showBar = false;
-                this.showSearch = false;
-                this.showItems = input;
-            }
+        toggleCanvas(input) {
+            this.showCanvas = true;
+            this.showBar = false;
+            this.showSearch = false;
+            this.showItems = input;
         },
         toggleBar() {
             this.showBar = !this.showBar;
